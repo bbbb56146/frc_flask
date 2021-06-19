@@ -1,3 +1,4 @@
+#-*-coding: utf-8-*-
 from flask import Flask, jsonify
 from flask import request
 import json
@@ -42,4 +43,4 @@ def method():
         return food_rec_query_result
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
