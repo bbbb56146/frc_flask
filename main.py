@@ -64,7 +64,7 @@ def method():
 
         return frc_response
 
-@app.route('/info', methods=['GET'])
+@app.route('/reco', methods=['GET'])
 def info():
     if request.method == 'GET':
         #print(request.args.to_dict())
@@ -101,15 +101,6 @@ def info():
             tmp_dict['num'] = food_rec_query_result[key]['meta']['total_count']
             food_rec_info.append(tmp_dict)
         frc_response['info'] = food_rec_info
-
-        food_rec_data = []
-        for key in food_rec_query_result.keys():
-            food_rec_data_dict = {}
-            food_rec_data_dict['menuName'] = key
-            food_rec_data_dict['meta'] = food_rec_query_result[key]['meta']
-            food_rec_data_dict['document'] = food_rec_query_result[key]['documents']
-            food_rec_data.append(food_rec_data_dict)
-        frc_response['data'] = food_rec_data
 
         return frc_rec_info   
     
