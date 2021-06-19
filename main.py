@@ -36,9 +36,18 @@ def method():
         print("sorted food_preference_dict: {}".format(food_freq))
 
         food_sim = recommend_foods.get_food_sim(menu2vec, food_freq, 10)  # 각 key값에 대해 유사메뉴 리스트 생성
-        food_recommend = recommend_foods.get_food_recommend(food_freq, food_sim, size=10) # 최종 추천 리스트 생성
+        food_recommend, food_sim_dict = recommend_foods.get_food_recommend(food_freq, food_sim, size=10) # 최종 추천 리스트 생성
 
         food_rec_query_result = recommend_foods.KakaoLocalQuery(food_recommend, size=10) # 최종 추천리스트에 해당하는 음식점 검색
+
+        food_rec_info = []
+        for key, sim in food_sim_dict.items():
+            tmp_dict = {}
+            tmp_dict['name'] = key
+            tmp_dict['similarity'] = sim
+            tmp_dict['num'] = food_rec_query_result[key]['meta']['total_count']
+            food_rec_info.append(tmp_dict)
+        food_rec_query_result['info'] = food_rec_info
 
         return food_rec_query_result
 

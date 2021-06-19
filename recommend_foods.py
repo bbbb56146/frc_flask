@@ -45,15 +45,16 @@ def get_food_recommend (food_pref_dic, food_sim, size=10):
       food_pref_dic_mod[food] = round((freq / freq_sum) * size)
   print("number of menu recommended: {}".format(food_pref_dic_mod))
 
+  food_sim_dict = {}
   for food, freq in food_pref_dic_mod.items():
     for i, food_sim_tuple in enumerate(food_sim.get(food)):
       if i >= freq:
         break
       elif food_sim_tuple[1] > 0.90:
         food_recommend.append(food_sim_tuple[0])
-
+        food_sim_dict[food_sim_tuple[0]] = food_sim_tuple[1]
   print("food_recommend: {}".format(food_recommend))
-  return food_recommend
+  return food_recommend, food_sim_dict
 
 # food_recommend의 각 food에 대해 Kakao local Api에 query를 한 결과
 def KakaoLocalQuery (food_recommend, size = 10):
