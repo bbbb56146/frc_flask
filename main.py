@@ -40,6 +40,8 @@ def method():
 
         food_rec_query_result = recommend_foods.KakaoLocalQuery(food_recommend, size=10) # 최종 추천리스트에 해당하는 음식점 검색
 
+        # ----json 데이터 정리----
+        frc_response = {}
         food_rec_info = []
         for key, sim in food_sim_dict.items():
             tmp_dict = {}
@@ -47,9 +49,18 @@ def method():
             tmp_dict['similarity'] = sim
             tmp_dict['num'] = food_rec_query_result[key]['meta']['total_count']
             food_rec_info.append(tmp_dict)
-        food_rec_query_result['info'] = food_rec_info
+        frc_response['info'] = food_rec_info
 
-        return food_rec_query_result
+        food_rec_data = []
+        for key in food_rec_query_result.keys():
+            food_rec_data_dict = {}
+            food_rec_data_dict['menuName'] = key
+            food_rec_data_dict['meta'] = food_rec_query_result[key]['meta']
+            food_rec_data_dict['document'] = food_rec_query_result[key]['documents']
+            food_rec_data.append(food_rec_data_dict)
+        frc_response['data'] = food_rec_data
+
+        return frc_response
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
