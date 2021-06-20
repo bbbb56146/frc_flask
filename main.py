@@ -103,7 +103,7 @@ def reco():
             print("appended"+key)
         frc_response['info'] = food_rec_info
 
-        return jsonify(frc_rec_info)   
+        return food_rec_info)   
     
 @app.route('/detail/<menu_name>', methods=['GET'])
 def datail(menu_name):
@@ -111,7 +111,7 @@ def datail(menu_name):
         
         key = rest_api_key.key
 
-        return jsonify(KakaoLocalApi.local_api_keyword(rest_api_key=key, keyword=menu_name, size=10))
+        return KakaoLocalApi.local_api_keyword(rest_api_key=key, keyword=menu_name, size=10)
     
     
     
