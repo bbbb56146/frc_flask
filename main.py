@@ -65,7 +65,7 @@ def method():
         return frc_response
 
 @app.route('/reco', methods=['GET'])
-def info():
+def reco():
     if request.method == 'GET':
         #print(request.args.to_dict())
         food_freq = json.loads(request.args.to_dict()['food_freq'])
