@@ -100,6 +100,7 @@ def reco():
             tmp_dict['similarity'] = sim
             tmp_dict['num'] = food_rec_query_result[key]['meta']['total_count']
             food_rec_info.append(tmp_dict)
+            print("appended"+key)
         frc_response['info'] = food_rec_info
 
         return frc_rec_info   
